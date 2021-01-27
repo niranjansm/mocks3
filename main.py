@@ -7,7 +7,6 @@ def get_client():
     
     return boto3.client('s3', region_name='us-east-1')
 
-
 def create_bucket(s3_client, bucket_name):
 
     s3_client.create_bucket(Bucket=bucket_name)
@@ -50,16 +49,13 @@ def list_bucket_objects(s3_client, bucket_name):
     print(f"Bucket: {bucket_name}\t Objects: {objects}")
     return objects
 
-if __name__ == "__main__":
-
-    mock = mock_s3()
-    mock.start()
-    
+def call_everything():
     s3 = get_client()
     
     # Create 2 mock buckets
     create_bucket(s3, "mockbucket1")
-    create_bucket(s3, "mockbucket2")    
+    create_bucket(s3, "mockbucket2")
+    create_bucket(s3, "mockbucket3")  
 
     # List all the bucket names
     print("\n##### After bucket creation #####")
@@ -96,4 +92,16 @@ if __name__ == "__main__":
     for bucket in bucket_names:
         objects = list_bucket_objects(s3, bucket)        
 
-    mock.stop()
+if __name__ == "__main__":
+
+    test = False
+    # if test == True:
+    #     mock = mock_s3()
+    #     mock.start()
+    with mock_s3():
+     call_everything()    
+
+    # if test == True:
+    #     mock.stop()
+
+
