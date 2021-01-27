@@ -11,7 +11,8 @@ def test_list_buckets():
     create_bucket(s3, bucketlist[0])
     create_bucket(s3, bucketlist[1])
     response = list_buckets(s3)
-    assert response ==  bucketlist
+    assert response == bucketlist
+
 
 @mock_s3
 def test_upload_file():
@@ -25,6 +26,7 @@ def test_upload_file():
 
     assert ["hello.txt"] == objects
 
+
 @mock_s3
 def test_download_file():
 
@@ -35,7 +37,8 @@ def test_download_file():
     download_file(s3, bucket_name)
     assert os.path.exists("downloadedhello.txt")
 
+
 @mock_s3
 def test_call_everything():
-    
-    call_everything()    
+
+    call_everything()
